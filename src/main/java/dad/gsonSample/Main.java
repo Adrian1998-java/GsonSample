@@ -1,5 +1,6 @@
 package dad.gsonSample;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
@@ -9,25 +10,57 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		//Variables necesarias para el funcionamiento del programa.
 		Persona p = new Persona();
-
+		int counter = 0;
+		boolean itsNumber = false;
+		int i = 0;
+		
 		// recoger datos desde la consola y almacenarlos en "p", asegurando que son el
 		// tipo de dato requerido
 
 		Scanner lectura = new Scanner(System.in);
-		do {
-			System.out.println("Escribe el nombre");
-			p.setNombre(lectura.nextLine());
+		
+		System.out.println("Escribe el nombre");
+		p.setNombre(lectura.nextLine());
 
-		} while (p.getNombre().isBlank());
+		do {
+			if (Character.isLetter(p.getNombre().charAt(i))) {
+				i++;
+			} else {
+				System.out.println("El nombre debe tener solo letras. Introduzca un nombre válido:");
+				p.setNombre(lectura.nextLine());
+				i = 0;
+			}
+		} while (i != p.getNombre().length());
 
 		System.out.println("Escribe los apellidos");
 		p.setApellidos(lectura.nextLine());
+		i = 0;
+
+		do {
+			if (Character.isLetter(p.getApellidos().charAt(i))) {
+				i++;
+			} else {
+				System.out.println("Los apellidos debe tener solo letras. Introduzca apellidos válidos:");
+				p.setApellidos(lectura.nextLine());
+				i = 0;
+			}
+		} while (i != p.getApellidos().length());
 
 		System.out.println("Escribe la edad");
-		p.setEdad(lectura.nextInt());
+		
+		do {
+			try {
+				p.setEdad(lectura.nextInt());
+			} catch (InputMismatchException e) {
+				System.out.println("Introduzca números, por favor -> ¡ " + e + " !");
+			}
+		} while ( !itsNumber );
 
-		// Muestra en consola a través de la salida 'Print'
+		lectura.close();
+		
+		// Muestra en consola 
 		System.out.println("Salida normal :");
 		System.out.println("Nombre: " + p.getNombre() + ", Apellidos: " + p.getApellidos() + ", Edad: " + p.getEdad());
 
@@ -35,7 +68,7 @@ public class Main {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(p);
 
-		System.out.println("\n\n Salida por Json :");
+		System.out.println("\nSalida por Json :");
 		System.out.println(json);
 
 	}
