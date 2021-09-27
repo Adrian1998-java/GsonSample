@@ -13,8 +13,8 @@ public class Main {
 		//Variables necesarias para el funcionamiento del programa.
 		Persona p = new Persona();
 		int counter = 0;
-		boolean itsNumber = false;
 		int i = 0;
+		boolean itsNumber = true;
 		
 		// recoger datos desde la consola y almacenarlos en "p", asegurando que son el
 		// tipo de dato requerido
@@ -50,13 +50,16 @@ public class Main {
 
 		System.out.println("Escribe la edad");
 		
-		do {
+		
+		while (itsNumber == true) {
 			try {
 				p.setEdad(lectura.nextInt());
+				itsNumber = true;
 			} catch (InputMismatchException e) {
 				System.out.println("Introduzca números, por favor -> ¡ " + e + " !");
+				itsNumber = false;
 			}
-		} while ( !itsNumber );
+		};
 
 		lectura.close();
 		
