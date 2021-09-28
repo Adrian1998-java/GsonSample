@@ -39,7 +39,7 @@ public class Main {
 		i = 0;
 
 		do {
-			if (Character.isLetter(p.getApellidos().charAt(i))) {
+			if (Character.isLetter(p.getApellidos().charAt(i)) || p.getApellidos().charAt(i) == ' ') {
 				i++;
 			} else {
 				System.out.println("Los apellidos debe tener solo letras. Introduzca apellidos válidos:");
