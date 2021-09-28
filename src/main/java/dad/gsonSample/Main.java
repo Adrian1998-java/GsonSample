@@ -10,17 +10,17 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		//Variables necesarias para el funcionamiento del programa.
+		// Variables necesarias para el funcionamiento del programa.
 		Persona p = new Persona();
 		int counter = 0;
 		int i = 0;
-		boolean itsNumber = true;
-		
+		boolean itsNumber = false;
+
 		// recoger datos desde la consola y almacenarlos en "p", asegurando que son el
 		// tipo de dato requerido
 
 		Scanner lectura = new Scanner(System.in);
-		
+
 		System.out.println("Escribe el nombre");
 		p.setNombre(lectura.nextLine());
 
@@ -49,22 +49,22 @@ public class Main {
 		} while (i != p.getApellidos().length());
 
 		System.out.println("Escribe la edad");
-		
-		
-		while (itsNumber == true) {
+
+		do {
 			try {
 				p.setEdad(lectura.nextInt());
 				itsNumber = true;
 			} catch (InputMismatchException e) {
-				System.out.println("Introduzca números, por favor -> ¡ " + e + " !");
+				System.out.println("Introduzca números, por favor : ");
 				itsNumber = false;
+				lectura.next();
 			}
-		};
+		} while (itsNumber == false);
 
 		lectura.close();
-		
-		// Muestra en consola 
-		System.out.println("Salida normal :");
+
+		// Muestra en consola
+		System.out.println("\nSalida normal :");
 		System.out.println("Nombre: " + p.getNombre() + ", Apellidos: " + p.getApellidos() + ", Edad: " + p.getEdad());
 
 		// Generamos la salida por consola usando Json
