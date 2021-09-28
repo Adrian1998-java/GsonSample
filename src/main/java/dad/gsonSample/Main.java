@@ -25,7 +25,7 @@ public class Main {
 		p.setNombre(lectura.nextLine());
 
 		do {
-			if (Character.isLetter(p.getNombre().charAt(i))) {
+			if (Character.isLetter(p.getNombre().charAt(i))|| p.getNombre().charAt(i) == ' ') {
 				i++;
 			} else {
 				System.out.println("El nombre debe tener solo letras. Introduzca un nombre válido:");
